@@ -80,8 +80,8 @@ private class Tile {
         g.fill3DRect(snakeHead.x*tileSize, snakeHead.y*tileSize, tileSize, tileSize, true);
         
         //Snake Body
-        for (int i = 0; i < snakeBody.size(); i++) {
-            Tile snakePart = snakeBody.get(i);
+        for (int k = 0; k < snakeBody.size(); k++) {
+            Tile snakePart = snakeBody.get(k);
             // g.fillRect(snakePart.x*tileSize, snakePart.y*tileSize, tileSize, tileSize);
             g.fill3DRect(snakePart.x*tileSize, snakePart.y*tileSize, tileSize, tileSize, true);
 		}
