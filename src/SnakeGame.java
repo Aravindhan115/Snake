@@ -68,25 +68,19 @@ private class Tile {
             g.drawLine(0, i*tileSize, boardWidth, i*tileSize); 
         }
 
-        //Food
+  
         g.setColor(Color.red);
-        // g.fillRect(food.x*tileSize, food.y*tileSize, tileSize, tileSize);
+      
         g.fill3DRect(food.x*tileSize, food.y*tileSize, tileSize, tileSize, true);
-
-        //Snake Head
-        g.setColor(Color.green);
-        // g.fillRect(snakeHead.x, snakeHead.y, tileSize, tileSize);
-        // g.fillRect(snakeHead.x*tileSize, snakeHead.y*tileSize, tileSize, tileSize);
+        g.setColor(Color.green);    
         g.fill3DRect(snakeHead.x*tileSize, snakeHead.y*tileSize, tileSize, tileSize, true);
-        
-        //Snake Body
+
         for (int l = 0; l < snakeBody.size(); l++) {
             Tile snakePart = snakeBody.get(l);
-            // g.fillRect(snakePart.x*tileSize, snakePart.y*tileSize, tileSize, tileSize);
+           
             g.fill3DRect(snakePart.x*tileSize, snakePart.y*tileSize, tileSize, tileSize, true);
 		}
 
-        //Score
         g.setFont(new Font("Arial", Font.PLAIN, 16));
         if (gameOver) {
             g.setColor(Color.red);
@@ -103,16 +97,15 @@ private class Tile {
 	}
 
     public void move() {
-        //eat food
+      
         if (collision(snakeHead, food)) {
             snakeBody.add(new Tile(food.x, food.y));
             placeFood();
         }
 
-        //move snake body
         for (int i = snakeBody.size()-1; i >= 0; i--) {
             Tile snakePart = snakeBody.get(i);
-            if (i == 0) { //right before the head
+            if (i == 0) { 
                 snakePart.x = snakeHead.x;
                 snakePart.y = snakeHead.y;
             }
@@ -122,22 +115,22 @@ private class Tile {
                 snakePart.y = prevSnakePart.y;
             }
         }
-        //move snake head
+      
         snakeHead.x += velocityX;
         snakeHead.y += velocityY;
 
-        //game over conditions
-        for (int i = 0; i < snakeBody.size(); i++) {
-            Tile snakePart = snakeBody.get(i);
+    
+        for (int h = 0; h < snakeBody.size(); h++) {
+            Tile snakePart = snakeBody.get(h);
 
-            //collide with snake head
+     
             if (collision(snakeHead, snakePart)) {
                 gameOver = true;
             }
         }
 
-        if (snakeHead.x*tileSize < 0 || snakeHead.x*tileSize > boardWidth || //passed left border or right border
-            snakeHead.y*tileSize < 0 || snakeHead.y*tileSize > boardHeight ) { //passed top border or bottom border
+        if (snakeHead.x*tileSize < 0 || snakeHead.x*tileSize > boardWidth || 
+            snakeHead.y*tileSize < 0 || snakeHead.y*tileSize > boardHeight ) {
             gameOver = true;
         }
     }
@@ -147,7 +140,7 @@ private class Tile {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) { //called every x milliseconds by gameLoop timer
+    public void actionPerformed(ActionEvent e) { 
         move();
         repaint();
         if (gameOver) {
